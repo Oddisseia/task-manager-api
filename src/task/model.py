@@ -1,3 +1,5 @@
+import json
+
 from src import database
 
 
@@ -5,13 +7,14 @@ class Task(database.Model):
     __tablename__ = "task"
 
     task_id = database.Column(database.Integer, primary_key=True, nullable=False, unique=True)
-    description = database.Column(database.String(), nullable=False)
-    start_date = database.Column(database.DateTime, nullable=False)
-    end_date = database.Column(database.DateTime, nullable=False)
+    name = database.Column(database.String())
+    description = database.Column(database.String())
+    dates = database.Column(database.String(), nullable=False)
 
-    def to_json(self):
+    def teste(self):
         return {
+            "task_id": self.task_id,
+            "name": self.name,
             "description": self.description,
-            "start_date": self.start_date,
-            "end_date": self.end_date
+            "dates": json.loads(self.dates)
         }
